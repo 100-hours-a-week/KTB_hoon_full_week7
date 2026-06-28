@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>게시글 상세</title>
+  <link rel="stylesheet" href="../css/post-detail.css" />
+</head>
+<body>
+
+  <header class="header">
+    <button class="btn-back" id="backBtn">&#8249;</button>
+    <span class="header-title">아무 말 대잔치</span>
+    <div class="header-profile">
+      <img class="profile-icon" id="profileIcon" src="../images/default-profile.png" alt="프로필" />
+      <div class="dropdown" id="dropdown">
+        <button class="dropdown-item" id="editProfileBtn">회원정보수정</button>
+        <button class="dropdown-item" id="editPasswordBtn">비밀번호수정</button>
+        <button class="dropdown-item" id="logoutBtn">로그아웃</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- 게시글 -->
+      <div class="post-header">
+        <p class="post-title" id="postTitle"></p>
+        <div class="post-info-row">
+          <div class="post-author">
+            <img class="author-img" src="../images/default-profile.png" alt="작성자" id="postAuthorImg" />
+            <span class="author-name" id="postAuthorName"></span>
+            <span class="post-date" id="postDate"></span>
+          </div>
+          <div class="post-actions" id="postActions" style="display: none;">
+            <button class="btn-action" id="editPostBtn">수정</button>
+            <button class="btn-action" id="deletePostBtn">삭제</button>
+          </div>
+        </div>
+      </div>
+
+      <img class="post-image" id="postImage" src="../images/default-profile.png" alt="게시글 이미지" />
+
+      <p class="post-content" id="postContent"></p>
+
+      <!-- 좋아요 / 조회수 / 댓글 -->
+      <div class="post-stats">
+        <div class="stat-box like-btn" id="likeBtn">
+          <span class="stat-number" id="likeCount">0</span>
+          <span class="stat-label">좋아요수</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="viewCount">0</span>
+          <span class="stat-label">조회수</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="commentCount">0</span>
+          <span class="stat-label">댓글</span>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- 댓글 입력 -->
+      <div class="comment-input-section">
+        <textarea
+          class="comment-textarea"
+          id="commentInput"
+          placeholder="댓글을 남겨주세요!"
+        ></textarea>
+        <div class="comment-input-footer">
+          <button class="btn-comment-submit" id="commentSubmitBtn">댓글 등록</button>
+        </div>
+      </div>
+
+      <!-- 댓글 목록 -->
+      <div class="comment-list" id="commentList"></div>
+    </div>
+  </main>
+
+  <!-- 게시글 삭제 모달 -->
+  <div class="modal-overlay" id="postDeleteModal">
+    <div class="modal">
+      <p class="modal-title">게시글을 삭제하시겠습니까?</p>
+      <p class="modal-desc">삭제한 내용은 복구 할 수 없습니다.</p>
+      <div class="modal-btn-group">
+        <button class="modal-btn cancel" id="postDeleteCancelBtn">취소</button>
+        <button class="modal-btn" id="postDeleteConfirmBtn">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 댓글 삭제 모달 -->
+  <div class="modal-overlay" id="commentDeleteModal">
+    <div class="modal">
+      <p class="modal-title">댓글을 삭제하시겠습니까?</p>
+      <p class="modal-desc">삭제한 내용은 복구 할 수 없습니다.</p>
+      <div class="modal-btn-group">
+        <button class="modal-btn cancel" id="commentDeleteCancelBtn">취소</button>
+        <button class="modal-btn" id="commentDeleteConfirmBtn">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/post-detail.js"></script>
+</body>
+</html>

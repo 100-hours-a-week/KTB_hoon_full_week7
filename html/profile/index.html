@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>회원정보수정</title>
+  <link rel="stylesheet" href="../css/profile.css" />
+</head>
+<body>
+
+  <header class="header">
+    <span class="header-title">아무 말 대잔치</span>
+    <div class="header-profile">
+      <img class="profile-icon" id="profileIcon" src="../images/default-profile.png" alt="프로필" />
+      <div class="dropdown" id="dropdown">
+        <button class="dropdown-item" id="editProfileBtn">회원정보수정</button>
+        <button class="dropdown-item" id="editPasswordBtn">비밀번호수정</button>
+        <button class="dropdown-item" id="logoutBtn">로그아웃</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h2>회원정보수정</h2>
+
+      <div class="profile-section">
+        <label>프로필 사진*</label>
+        <div class="profile-img-wrapper">
+          <input type="file" id="fileInput" accept="image/*" />
+          <img id="profileImg" src="../images/default-profile.png" alt="프로필 이미지" />
+          <button class="profile-change-btn" id="profileChangeBtn">변경</button>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-group">
+          <label>이메일</label>
+          <p class="email-text" id="emailText"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="nickname">닉네임</label>
+          <input type="text" id="nickname" placeholder="닉네임을 입력하세요" />
+          <p class="helper-text" id="nicknameHelper">띄어쓰기 불가, 10글자 이내</p>
+        </div>
+
+        <button class="btn-submit" id="submitBtn">수정하기</button>
+      </div>
+
+      <div class="withdraw-section">
+        <button class="btn-withdraw" id="withdrawBtn">회원 탈퇴</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 수정완료 토스트 -->
+  <div class="toast" id="toast"></div>
+
+  <!-- 회원탈퇴 확인 모달 -->
+  <div class="modal-overlay" id="withdrawModalOverlay">
+    <div class="modal">
+      <p class="modal-title">회원탈퇴 하시겠습니까?</p>
+      <p class="modal-desc">작성된 게시글과 댓글은 삭제됩니다.</p>
+      <div class="modal-btn-group">
+        <button class="modal-btn cancel" id="withdrawCancelBtn">취소</button>
+        <button class="modal-btn" id="withdrawConfirmBtn">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/profile.js"></script>
+</body>
+</html>

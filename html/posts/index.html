@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>게시글 목록</title>
+  <link rel="stylesheet" href="../css/posts.css" />
+</head>
+<body>
+
+  <header class="header">
+    <span class="header-title">아무 말 대잔치</span>
+    <div class="header-profile">
+      <img class="profile-icon" id="profileIcon" src="../images/default-profile.png" alt="프로필" />
+      <div class="dropdown" id="dropdown">
+        <button class="dropdown-item" id="editProfileBtn">회원정보수정</button>
+        <button class="dropdown-item" id="editPasswordBtn">비밀번호수정</button>
+        <button class="dropdown-item" id="logoutBtn">로그아웃</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <p class="intro">
+      안녕하세요,<br/>
+      아무 말 대잔치 <strong>게시판</strong> 입니다.
+    </p>
+
+    <div class="write-btn-wrapper">
+      <button class="btn-write" id="writeBtn">게시글 작성</button>
+    </div>
+    <div class="post-list" id="postList">
+    <div class="loading" id="loading">불러오는 중...</div>
+  </main>
+
+  <script src="../js/posts.js"></script>
+</body>
+</html>

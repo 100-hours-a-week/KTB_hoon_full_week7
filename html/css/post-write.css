@@ -1,0 +1,247 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+/* 헤더 */
+.header {
+  background-color: #fff;
+  padding: 12px 20px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.btn-back {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  padding: 0 4px;
+}
+
+.btn-back:hover {
+  color: #000;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+}
+
+.header-profile {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.profile-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  display: block;
+}
+
+.profile-icon:hover {
+  opacity: 0.8;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 140px;
+  z-index: 100;
+}
+
+.dropdown.show {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background-color: #E9E9E9;
+}
+
+.dropdown-item + .dropdown-item {
+  border-top: 1px solid #eee;
+}
+
+/* 메인 */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 20px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 24px;
+}
+
+/* 폼 */
+.form-section {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  color: #333;
+  resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #888;
+}
+
+.form-group textarea {
+  height: 160px;
+}
+
+.helper-text {
+  font-size: 11px;
+  color: #e53935;
+  min-height: 16px;
+}
+
+/* 이미지 업로드 */
+.image-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.image-group label {
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+}
+
+.image-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 10px;
+  background-color: #fff;
+}
+
+.btn-file {
+  padding: 4px 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-file:hover {
+  background-color: #e0e0e0;
+}
+
+.file-name {
+  font-size: 12px;
+  color: #888;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#fileInput {
+  display: none;
+}
+
+/* 완료 버튼 */
+.btn-submit {
+  width: 100%;
+  padding: 10px;
+  background-color: #ACA0EB;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 4px;
+}
+
+.btn-submit.active {
+  background-color: #7F6AEE;
+}
+
+.btn-submit:hover {
+  background-color: #9b8fe0;
+}
+
+.btn-submit.active:hover {
+  background-color: #6f5bdc;
+}

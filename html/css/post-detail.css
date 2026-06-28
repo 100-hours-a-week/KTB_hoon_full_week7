@@ -1,0 +1,436 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+/* 헤더 */
+.header {
+  background-color: #fff;
+  padding: 12px 20px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.btn-back {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  padding: 0 4px;
+}
+
+.btn-back:hover {
+  color: #000;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+}
+
+.header-profile {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.profile-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  display: block;
+}
+
+.profile-icon:hover {
+  opacity: 0.8;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 140px;
+  z-index: 100;
+}
+
+.dropdown.show {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background-color: #E9E9E9;
+}
+
+.dropdown-item + .dropdown-item {
+  border-top: 1px solid #eee;
+}
+
+/* 메인 */
+main {
+  display: flex;
+  justify-content: center;
+  padding: 24px 20px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.container {
+  width: 100%;
+  max-width: 360px;
+}
+
+/* 게시글 헤더 */
+.post-header {
+  margin-bottom: 16px;
+}
+
+.post-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.post-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.author-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  background-color: #ccc;
+}
+
+.author-name {
+  font-size: 13px;
+  color: #555;
+}
+
+.post-date {
+  font-size: 12px;
+  color: #999;
+}
+
+.post-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-action {
+  padding: 5px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 12px;
+  color: #555;
+  cursor: pointer;
+}
+
+.btn-action:hover {
+  background-color: #f5f5f5;
+}
+
+/* 게시글 이미지 */
+.post-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 4px;
+  background-color: #ddd;
+  display: block;
+  margin-bottom: 16px;
+}
+
+/* 게시글 본문 */
+.post-content {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  white-space: pre-wrap;
+}
+
+/* 좋아요/조회/댓글 */
+.post-stats {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.stat-box {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.stat-box.like-btn {
+  cursor: pointer;
+}
+
+.stat-number {
+  font-size: 15px;
+  font-weight: bold;
+  color: #222;
+  display: block;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #888;
+  display: block;
+  margin-top: 2px;
+}
+
+.stat-box.liked .stat-number {
+  color: #ACA0EB;
+}
+
+/* 구분선 */
+.divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin-bottom: 16px;
+}
+
+/* 댓글 입력 */
+.comment-input-section {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.comment-textarea {
+  width: 100%;
+  height: 80px;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-family: inherit;
+  color: #333;
+  resize: none;
+}
+
+.comment-textarea::placeholder {
+  color: #aaa;
+}
+
+.comment-input-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.btn-comment-submit {
+  padding: 6px 16px;
+  background-color: #ACA0EB;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-comment-submit.active {
+  background-color: #7F6AEE;
+}
+
+.btn-comment-submit:hover {
+  background-color: #9b8fe0;
+}
+
+/* 댓글 목록 */
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comment-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.comment-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.comment-author-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  background-color: #ccc;
+}
+
+.comment-author-name {
+  font-size: 13px;
+  color: #555;
+}
+
+.comment-date {
+  font-size: 11px;
+  color: #999;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-comment-action {
+  padding: 3px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 11px;
+  color: #555;
+  cursor: pointer;
+}
+
+.btn-comment-action:hover {
+  background-color: #f5f5f5;
+}
+
+.comment-content {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 모달 */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+/* 모달 뜰 때 스크롤 막기 */
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 32px 24px;
+  width: 300px;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.modal-desc {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.modal-btn-group {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.modal-btn {
+  padding: 10px 32px;
+  background-color: #7F6AEE;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.modal-btn:hover {
+  opacity: 0.9;
+}
+
+.modal-btn.cancel {
+  background-color: #1a1a1a;
+}
