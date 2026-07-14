@@ -1,6 +1,3 @@
-const BASE_URL = 'http://localhost:8080';
-const DEFAULT_IMAGE = '../images/default-profile.png';
-
 const profileIcon = document.getElementById('profileIcon');
 const dropdown = document.getElementById('dropdown');
 const editProfileBtn = document.getElementById('editProfileBtn');
@@ -9,6 +6,7 @@ const logoutBtn = document.getElementById('logoutBtn');
 
 const writeBtn = document.getElementById('writeBtn');
 const postList = document.getElementById('postList');
+const listMessage = document.getElementById('listMessage');
 const loading = document.getElementById('loading');
 
 let nextCursor = null;
@@ -44,12 +42,7 @@ editPasswordBtn.addEventListener('click', () => {
 
 logoutBtn.addEventListener('click', async () => {
     try {
-        await fetch(BASE_URL + '/api/v1/logout', {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-            }
-        });
+        await apiFetch('/logout', { method: 'POST' });
     } catch (err) {
         console.error('로그아웃 실패', err);
     } finally {
@@ -134,32 +127,35 @@ function createPostCard(post) {
 async function loadPosts() {
     if (isLoading || !hasNext) return;
     isLoading = true;
+    listMessage.textContent = '';
 
     try {
         loading.classList.add('show');
 
-        const url = nextCursor
-            ? `${BASE_URL}/api/v1/posts?size=10&cursor=${nextCursor}`
-            : `${BASE_URL}/api/v1/posts?size=10`;
-
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-            }
-        });
+        const query = nextCursor ? `?size=10&cursor=${nextCursor}` : `?size=10`;
+        const response = await apiFetch(`/posts${query}`);
 
         const data = await response.json();
 
-        if (response.ok) {
-            data.data.data.forEach(post => {
-                postList.appendChild(createPostCard(post));
-            });
-            nextCursor = data.data.nextCursor;
-            hasNext = data.data.hasNext;
+        if (!response.ok) {
+            console.error('게시글 로드 실패', data);
+            listMessage.textContent = '게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.';
+            return;
+        }
+
+        data.data.data.forEach(post => {
+            postList.appendChild(createPostCard(post));
+        });
+        nextCursor = data.data.nextCursor;
+        hasNext = data.data.hasNext;
+
+        if (postList.children.length === 0) {
+            listMessage.textContent = '아직 게시글이 없습니다.';
         }
 
     } catch (err) {
         console.error('게시글 로드 실패', err);
+        listMessage.textContent = '게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.';
     } finally {
         loading.classList.remove('show');
         isLoading = false;

@@ -1,6 +1,3 @@
-const BASE_URL = 'http://localhost:8080';
-const DEFAULT_IMAGE = '../images/default-profile.png';
-
 const profileIcon = document.getElementById('profileIcon');
 const dropdown = document.getElementById('dropdown');
 const editProfileBtn = document.getElementById('editProfileBtn');
@@ -41,12 +38,7 @@ editPasswordBtn.addEventListener('click', () => {
 
 logoutBtn.addEventListener('click', async () => {
     try {
-        await fetch(BASE_URL + '/api/v1/logout', {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-            }
-        });
+        await apiFetch('/logout', { method: 'POST' });
     } catch (err) {
         console.error('로그아웃 실패', err);
     } finally {
@@ -105,12 +97,8 @@ submitBtn.addEventListener('click', async () => {
     submitBtn.disabled = true;
 
     try {
-        const response = await fetch(BASE_URL + '/api/v1/profile/pw', {
+        const response = await apiFetch('/profile/pw', {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-            },
             body: JSON.stringify({ password, passwordConfirm })
         });
 

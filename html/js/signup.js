@@ -1,5 +1,3 @@
-const BASE_URL = 'http://localhost:8080';
-
 const profileBtn = document.getElementById("profileBtn");
 const fileInput = document.getElementById('fileInput');
 const profileImg = document.getElementById('profileImg');
@@ -92,11 +90,8 @@ registerBtn.addEventListener('click', async () => {
     if (!isValid) return;
 
     try {
-        const response = await fetch(BASE_URL + "/api/v1/signup", {
+        const response = await apiFetch("/signup", {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify({ email, nickname, password, passwordConfirm, imageUrl })
         });
 

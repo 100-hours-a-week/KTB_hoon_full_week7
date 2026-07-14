@@ -221,3 +221,13 @@ main {
 .loading.show {
   display: block;
 }
+
+.list-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+  font-size: 14px;
+}
+.list-message:empty {
+  display: none;
+}

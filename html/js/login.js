@@ -1,5 +1,3 @@
-const BASE_URL = 'http://localhost:8080/api/v1';
-
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const loginBtn = document.getElementById('loginBtn');
@@ -37,11 +35,8 @@ loginBtn.addEventListener('click', async () => {
   if (!isValid) return;
 
   try {
-    const response = await fetch(BASE_URL + "/login", {
+    const response = await apiFetch("/login", {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify({ email, password })
     });
 

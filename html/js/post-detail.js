@@ -1,6 +1,3 @@
-const BASE_URL = 'http://localhost:8080';
-const DEFAULT_IMAGE = '../images/default-profile.png';
-
 const profileIcon = document.getElementById('profileIcon');
 const dropdown = document.getElementById('dropdown');
 const editProfileBtn = document.getElementById('editProfileBtn');
@@ -39,6 +36,8 @@ let isLiked = false;
 let currentLikeCount = 0;
 let editingCommentId = null;
 let deletingCommentId = null;
+let isLikeLoading = false;
+let isCommentSubmitting = false;
 
 window.addEventListener('load', () => {
     const token = localStorage.getItem('accessToken');
@@ -69,10 +68,7 @@ editPasswordBtn.addEventListener('click', () => {
 
 logoutBtn.addEventListener('click', async () => {
     try {
-        await fetch(BASE_URL + '/api/v1/logout', {
-            method: 'POST',
-            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('accessToken') }
-        });
+        await apiFetch('/logout', { method: 'POST' });
     } catch (err) {
         console.error('로그아웃 실패', err);
     } finally {
@@ -96,14 +92,14 @@ function formatDate(dateStr) {
 
 async function loadPost() {
     try {
-        const response = await fetch(`${BASE_URL}/api/v1/posts/${postId}`, {
-            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('accessToken') }
-        });
+        const response = await apiFetch(`/posts/${postId}`);
 
         const data = await response.json();
 
         if (!response.ok) {
             console.error('게시글 로드 실패', data);
+            postTitle.textContent = '게시글을 불러오지 못했습니다';
+            postContent.textContent = '잠시 후 다시 시도해주세요.';
             return;
         }
 
@@ -140,6 +136,8 @@ async function loadPost() {
 
     } catch (err) {
         console.error('게시글 로드 실패', err);
+        postTitle.textContent = '게시글을 불러오지 못했습니다';
+        postContent.textContent = '잠시 후 다시 시도해주세요.';
     }
 }
 
@@ -155,32 +153,26 @@ function updateLikeUI() {
 }
 
 likeBtn.addEventListener('click', async () => {
+    if (isLikeLoading) return;
+    isLikeLoading = true;
+    likeBtn.disabled = true;
+
     try {
-        if (isLiked) {
-            const response = await fetch(`${BASE_URL}/api/v1/posts/${postId}/likes`, {
-                method: 'DELETE',
-                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('accessToken') }
-            });
-            const data = await response.json();
-            if (response.ok) {
-                isLiked = false;
-                currentLikeCount = data.data.likeCount;
-                updateLikeUI();
-            }
-        } else {
-            const response = await fetch(`${BASE_URL}/api/v1/posts/${postId}/likes`, {
-                method: 'POST',
-                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('accessToken') }
-            });
-            const data = await response.json();
-            if (response.ok) {
-                isLiked = true;
-                currentLikeCount = data.data.likeCount;
-                updateLikeUI();
-            }
+        const response = await apiFetch(`/posts/${postId}/likes`, {
+            method: isLiked ? 'DELETE' : 'POST'
+        });
+        const data = await response.json();
+        if (response.ok) {
+            // 좋아요 상태의 출처를 서버 응답 하나로 통일한다.
+            isLiked = data.data.isLikedByMe;
+            currentLikeCount = data.data.likeCount;
+            updateLikeUI();
         }
     } catch (err) {
         console.error('좋아요 실패', err);
+    } finally {
+        isLikeLoading = false;
+        likeBtn.disabled = false;
     }
 });
 
@@ -200,10 +192,7 @@ postDeleteCancelBtn.addEventListener('click', () => {
 
 postDeleteConfirmBtn.addEventListener('click', async () => {
     try {
-        const response = await fetch(`${BASE_URL}/api/v1/posts/${postId}`, {
-            method: 'DELETE',
-            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('accessToken') }
-        });
+        const response = await apiFetch(`/posts/${postId}`, { method: 'DELETE' });
 
         if (response.ok) {
             window.location.href = '/posts';
@@ -227,43 +216,34 @@ commentInput.addEventListener('input', () => {
 commentSubmitBtn.addEventListener('click', async () => {
     const content = commentInput.value.trim();
     if (!content) return;
+    if (isCommentSubmitting) return;
+
+    isCommentSubmitting = true;
+    commentSubmitBtn.disabled = true;
 
     try {
-        if (editingCommentId) {
-            const response = await fetch(`${BASE_URL}/api/v1/posts/${postId}/comments/${editingCommentId}`, {
+        const response = editingCommentId
+            ? await apiFetch(`/posts/${postId}/comments/${editingCommentId}`, {
                 method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-                },
                 body: JSON.stringify({ content })
-            });
-
-            if (response.ok) {
-                editingCommentId = null;
-                commentSubmitBtn.textContent = '댓글 등록';
-                commentInput.value = '';
-                commentSubmitBtn.classList.remove('active');
-                loadPost();
-            }
-        } else {
-            const response = await fetch(`${BASE_URL}/api/v1/posts/${postId}/comments`, {
+            })
+            : await apiFetch(`/posts/${postId}/comments`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-                },
                 body: JSON.stringify({ content })
             });
 
-            if (response.ok) {
-                commentInput.value = '';
-                commentSubmitBtn.classList.remove('active');
-                loadPost();
-            }
+        if (response.ok) {
+            editingCommentId = null;
+            commentSubmitBtn.textContent = '댓글 등록';
+            commentInput.value = '';
+            commentSubmitBtn.classList.remove('active');
+            loadPost();
         }
     } catch (err) {
         console.error('댓글 등록/수정 실패', err);
+    } finally {
+        isCommentSubmitting = false;
+        commentSubmitBtn.disabled = false;
     }
 });
 
@@ -344,9 +324,8 @@ commentDeleteCancelBtn.addEventListener('click', () => {
 
 commentDeleteConfirmBtn.addEventListener('click', async () => {
     try {
-        const response = await fetch(`${BASE_URL}/api/v1/posts/${postId}/comments/${deletingCommentId}`, {
-            method: 'DELETE',
-            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('accessToken') }
+        const response = await apiFetch(`/posts/${postId}/comments/${deletingCommentId}`, {
+            method: 'DELETE'
         });
 
         if (response.ok) {

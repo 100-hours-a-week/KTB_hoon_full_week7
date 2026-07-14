@@ -1,5 +1,3 @@
-const BASE_URL = 'http://localhost:8080';
-const DEFAULT_IMAGE = '../images/default-profile.png';
 const IMAGE_URL = 'https://cdn.example.com/post/default.png';
 
 const profileIcon = document.getElementById('profileIcon');
@@ -35,14 +33,19 @@ window.addEventListener('load', () => {
 
 async function loadPost() {
     try {
-        const response = await fetch(`${BASE_URL}/api/v1/posts/${postId}`, {
-            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('accessToken') }
-        });
+        const response = await apiFetch(`/posts/${postId}`);
 
         const data = await response.json();
 
         if (response.ok) {
             const post = data.data;
+
+            // 내 글이 아니면 폼에 내용을 채우지 않고 상세로 되돌린다.
+            if (!post.isMine) {
+                window.location.href = `/post-detail/?postId=${postId}`;
+                return;
+            }
+
             titleInput.value = post.title;
             contentInput.value = post.content;
             fileName.textContent = post.imageUrl ? post.imageUrl.split('/').pop() : '기존 파일 명';
@@ -73,10 +76,7 @@ editPasswordBtn.addEventListener('click', () => {
 
 logoutBtn.addEventListener('click', async () => {
     try {
-        await fetch(BASE_URL + '/api/v1/logout', {
-            method: 'POST',
-            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('accessToken') }
-        });
+        await apiFetch('/logout', { method: 'POST' });
     } catch (err) {
         console.error('로그아웃 실패', err);
     } finally {
@@ -136,12 +136,8 @@ submitBtn.addEventListener('click', async () => {
     submitBtn.disabled = true;
 
     try {
-        const response = await fetch(`${BASE_URL}/api/v1/posts/${postId}`, {
+        const response = await apiFetch(`/posts/${postId}`, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-            },
             body: JSON.stringify({ title, content, imageUrl })
         });
 

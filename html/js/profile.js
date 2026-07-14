@@ -1,6 +1,3 @@
-const BASE_URL = 'http://localhost:8080';
-const DEFAULT_IMAGE = '../images/default-profile.png';
-
 const profileIcon = document.getElementById('profileIcon');
 const dropdown = document.getElementById('dropdown');
 const editProfileBtn = document.getElementById('editProfileBtn');
@@ -14,9 +11,6 @@ const nicknameInput = document.getElementById('nickname');
 const nicknameHelper = document.getElementById('nicknameHelper');
 const submitBtn = document.getElementById('submitBtn');
 const withdrawBtn = document.getElementById('withdrawBtn');
-
-const modalOverlay = document.getElementById('modalOverlay');
-const modalBtn = document.getElementById('modalBtn');
 
 const withdrawModalOverlay = document.getElementById('withdrawModalOverlay');
 const withdrawCancelBtn = document.getElementById('withdrawCancelBtn');
@@ -36,11 +30,7 @@ window.addEventListener('load', () => {
 
 async function loadUserInfo() {
     try {
-        const response = await fetch(BASE_URL + '/api/v1/profile', {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-            }
-        });
+        const response = await apiFetch('/profile');
 
         const data = await response.json();
 
@@ -76,12 +66,7 @@ editPasswordBtn.addEventListener('click', () => {
 
 logoutBtn.addEventListener('click', async () => {
     try {
-        await fetch(BASE_URL + '/api/v1/logout', {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-            }
-        });
+        await apiFetch('/logout', { method: 'POST' });
     } catch (err) {
         console.error('로그아웃 실패', err);
     } finally {
@@ -127,12 +112,8 @@ submitBtn.addEventListener('click', async () => {
     submitBtn.disabled = true;
 
     try {
-        const response = await fetch(BASE_URL + '/api/v1/profile', {
+        const response = await apiFetch('/profile', {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-            },
             body: JSON.stringify({ nickname, imageUrl })
         });
 
@@ -163,10 +144,6 @@ submitBtn.addEventListener('click', async () => {
     }
 });
 
-modalBtn.addEventListener('click', () => {
-    modalOverlay.classList.remove('show');
-});
-
 withdrawBtn.addEventListener('click', () => {
     withdrawModalOverlay.classList.add('show');
 });
@@ -177,12 +154,7 @@ withdrawCancelBtn.addEventListener('click', () => {
 
 withdrawConfirmBtn.addEventListener('click', async () => {
     try {
-        const response = await fetch(BASE_URL + '/api/v1/profile', {
-            method: 'DELETE',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-            }
-        });
+        const response = await apiFetch('/profile', { method: 'DELETE' });
 
         if (response.ok) {
             localStorage.removeItem('accessToken');
