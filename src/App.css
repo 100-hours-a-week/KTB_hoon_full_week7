@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.title-bar {
+  background-color: #fff;
+  text-align: center;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  max-width: 480px;
+  margin: 0 auto;
+  color: #333;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.login-form {
+  background-color: transparent;
+  border: none;
+  padding: 24px 0;
+  width: 320px;
+}
+
+.login-form h2 {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.field {
+  margin-bottom: 14px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.field input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 13px;
+  outline: none;
+  color: #333;
+}
+
+.field input::placeholder {
+  color: #aaa;
+}
+
+.field input:focus {
+  border-color: #888;
+}
+
+.helper-text {
+  font-size: 11px;
+  color: #e53935;
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 9px;
+  background-color: #ACA0EB;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background-color 0.2s;
+}
+
+.login-btn:hover {
+  background-color: #9b8fe0;
+}
+
+.login-btn.active {
+  background-color: #7F6AEE;
+}
+
+.login-btn.active:hover {
+  background-color: #6f5bdc;
+}
+
+.register-btn {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 9px;
+  background-color: transparent;
+  color: #555;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.register-btn:hover {
+  color: #222;
+}
