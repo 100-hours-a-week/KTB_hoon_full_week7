@@ -10,7 +10,6 @@ const PROFILE_ERROR_MAP = {
   NICKNAME_DUPLICATED: "중복 닉네임입니다.",
   IMAGE_REQUIRED: "프로필 이미지를 선택해주세요.",
 };
-const NICKNAME_HELPER_DEFAULT = "띄어쓰기 불가, 10글자 이내";
 const DEFAULT_IMAGE = "/images/default-profile.png";
 const PLACEHOLDER_IMAGE_URL = "https://cdn.example.com/profile/u1.png";
 
@@ -24,7 +23,7 @@ export default function ProfileForm({ onUpdated }) {
   const [originalNickname, setOriginalNickname] = useState("");
   const [previewUrl, setPreviewUrl] = useState(DEFAULT_IMAGE);
   const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE_URL);
-  const [nicknameError, setNicknameError] = useState(NICKNAME_HELPER_DEFAULT);
+  const [nicknameError, setNicknameError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isActive = nickname && isValidNickname(nickname) && nickname !== originalNickname;
 
@@ -57,7 +56,8 @@ export default function ProfileForm({ onUpdated }) {
   async function handleSubmit() {
     if (isSubmitting) return;
 
-    setNicknameError(NICKNAME_HELPER_DEFAULT);
+    // 안내는 placeholder가 담당 → 재검증 전 이전 에러만 초기화
+    setNicknameError("");
 
     if (!nickname) {
       setNicknameError("닉네임을 입력해주세요.");
@@ -100,7 +100,7 @@ export default function ProfileForm({ onUpdated }) {
         <p className="email-text">{email}</p>
       </div>
       <NicknameField value={nickname} error={nicknameError} onChange={handleNicknameChange}/>
-      <Button label="수정하기" variant="login" className={isActive ? "active" : ""} onClick={handleSubmit}/>
+      <Button label="수정하기" variant="login" className={isActive ? "active" : ""} onClick={handleSubmit} disabled={!isActive}/>
     </div>
   );
 }

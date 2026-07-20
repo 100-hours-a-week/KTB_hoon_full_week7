@@ -63,7 +63,7 @@ export default function LoginForm({ onLoginSuccess }) {
             <h2>로그인</h2>
             <EmailField value={email} error={emailError} onChange={setEmail} />
             <PasswordField value={password} error={passwordError} onChange={setPassword} />
-            <Button label="로그인" variant="login" className={isActive ? "active" : ""} onClick={handleLogin} />
+            <Button label="로그인" variant="login" className={isActive ? "active" : ""} onClick={handleLogin} disabled={!isActive} />
         </div>
     );
 }

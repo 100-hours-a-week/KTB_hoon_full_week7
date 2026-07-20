@@ -51,10 +51,12 @@ export default function SignupForm({ onSignupSuccess }) {
         setPreviewUrl(URL.createObjectURL(file));
     }
     async function handleSignup() {
-        setEmailError("영문과 @, . 만 가능합니다");
-        setPasswordError("비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.");
+        // 안내 문구는 placeholder가 담당 → helper text는 에러 전용.
+        // 재검증 전에 이전 제출에서 남은 에러를 모두 초기화한다.
+        setEmailError("");
+        setPasswordError("");
         setPasswordConfirmError("");
-        setNicknameError("띄어쓰기 불가, 10글자 이내");
+        setNicknameError("");
 
         let isValid = true;
 
@@ -132,7 +134,7 @@ export default function SignupForm({ onSignupSuccess }) {
             <PasswordField value={password} error={passwordError} onChange={setPassword} />
             <PasswordConfirmField value={passwordConfirm} error={passwordConfirmError} onChange={setPasswordConfirm} />
             <NicknameField value={nickname} error={nicknameError} onChange={setNickname} />
-            <Button label="회원가입" variant="login" className={isActive ? "active" : ""} onClick={handleSignup} />
+            <Button label="회원가입" variant="login" className={isActive ? "active" : ""} onClick={handleSignup} disabled={!isActive} />
         </div>
     );
 

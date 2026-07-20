@@ -20,7 +20,7 @@ function isValidPassword(password) {
 export default function ProfilePasswordForm({ onUpdated }) {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [passwordError, setPasswordError] = useState(PASSWORD_HELPER_DEFAULT);
+  const [passwordError, setPasswordError] = useState("");
   const [passwordConfirmError, setPasswordConfirmError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -33,7 +33,8 @@ export default function ProfilePasswordForm({ onUpdated }) {
   async function handleSubmit() {
     if (isSubmitting) return;
 
-    setPasswordError(PASSWORD_HELPER_DEFAULT);
+    // 안내는 placeholder가 담당 → 재검증 전 이전 에러만 초기화
+    setPasswordError("");
     setPasswordConfirmError("");
 
     let isValid = true;
@@ -93,6 +94,7 @@ export default function ProfilePasswordForm({ onUpdated }) {
         variant="login"
         className={isActive ? "active" : ""}
         onClick={handleSubmit}
+        disabled={!isActive}
       />
     </div>
   );
