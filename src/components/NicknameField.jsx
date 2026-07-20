@@ -5,7 +5,7 @@ export default function NicknameField({ value, error, onChange }) {
     return (
         <div className="field">
             <label>닉네임</label>
-            <Input type="nickname" value={value} onChange={(e) => onChange(e.target.value)} />
+            <Input type="text" value={value} onChange={onChange} />
             <HelperText message={error} />
         </div>
     );
