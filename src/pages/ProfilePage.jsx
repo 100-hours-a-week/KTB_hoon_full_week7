@@ -47,7 +47,7 @@ export default function ProfilePage() {
           <div className="withdraw-section">
             <Button
               label="회원 탈퇴"
-              variant="register"
+              variant="link"
               className="btn-withdraw"
               onClick={() => setIsWithdrawModalOpen(true)}
             />

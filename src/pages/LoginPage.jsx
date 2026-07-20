@@ -15,7 +15,7 @@ export default function LoginPage() {
             <main>
                 <div className="login-form">
                     <LoginForm onLoginSuccess={handleLoginSuccess} />
-                    <Button label="회원가입" variant="register" onClick={() => navigate("/signup")} />
+                    <Button label="회원가입" variant="link" onClick={() => navigate("/signup")} />
                 </div>
             </main>
         </>

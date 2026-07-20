@@ -51,8 +51,6 @@ export default function SignupForm({ onSignupSuccess }) {
         setPreviewUrl(URL.createObjectURL(file));
     }
     async function handleSignup() {
-        // 안내 문구는 placeholder가 담당 → helper text는 에러 전용.
-        // 재검증 전에 이전 제출에서 남은 에러를 모두 초기화한다.
         setEmailError("");
         setPasswordError("");
         setPasswordConfirmError("");
@@ -134,7 +132,7 @@ export default function SignupForm({ onSignupSuccess }) {
             <PasswordField value={password} error={passwordError} onChange={setPassword} />
             <PasswordConfirmField value={passwordConfirm} error={passwordConfirmError} onChange={setPasswordConfirm} />
             <NicknameField value={nickname} error={nicknameError} onChange={setNickname} />
-            <Button label="회원가입" variant="login" className={isActive ? "active" : ""} onClick={handleSignup} disabled={!isActive} />
+            <Button label="회원가입" variant="primary" className={isActive ? "active" : ""} onClick={handleSignup} disabled={!isActive} />
         </div>
     );
 

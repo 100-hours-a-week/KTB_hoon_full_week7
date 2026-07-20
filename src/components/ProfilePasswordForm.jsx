@@ -91,7 +91,7 @@ export default function ProfilePasswordForm({ onUpdated }) {
       />
       <Button
         label="수정하기"
-        variant="login"
+        variant="primary"
         className={isActive ? "active" : ""}
         onClick={handleSubmit}
         disabled={!isActive}

@@ -107,7 +107,7 @@ main {
   min-height: 16px;
 }
 
-.login-btn {
+.btn-primary {
   width: 100%;
   padding: 9px;
   background-color: #ACA0EB;
@@ -120,27 +120,27 @@ main {
   transition: background-color 0.2s;
 }
 
-.login-btn:hover {
+.btn-primary:hover {
   background-color: #9b8fe0;
 }
 
-.login-btn:disabled {
+.btn-primary:disabled {
   cursor: not-allowed;
 }
 
-.login-btn:disabled:hover {
+.btn-primary:disabled:hover {
   background-color: #ACA0EB;
 }
 
-.login-btn.active {
+.btn-primary.active {
   background-color: #7F6AEE;
 }
 
-.login-btn.active:hover {
+.btn-primary.active:hover {
   background-color: #6f5bdc;
 }
 
-.register-btn {
+.btn-link {
   display: block;
   width: 100%;
   margin-top: 8px;
@@ -154,7 +154,7 @@ main {
   text-underline-offset: 3px;
 }
 
-.register-btn:hover {
+.btn-link:hover {
   color: #222;
 }
 

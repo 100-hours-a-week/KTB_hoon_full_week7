@@ -100,7 +100,7 @@ export default function ProfileForm({ onUpdated }) {
         <p className="email-text">{email}</p>
       </div>
       <NicknameField value={nickname} error={nicknameError} onChange={handleNicknameChange}/>
-      <Button label="수정하기" variant="login" className={isActive ? "active" : ""} onClick={handleSubmit} disabled={!isActive}/>
+      <Button label="수정하기" variant="primary" className={isActive ? "active" : ""} onClick={handleSubmit} disabled={!isActive}/>
     </div>
   );
 }

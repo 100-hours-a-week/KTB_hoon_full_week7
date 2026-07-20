@@ -16,7 +16,7 @@ export default function SignupPage() {
       <main>
         <div className="login-form">
           <SignupForm onSignupSuccess={handleSignupSuccess} />
-          <Button label="로그인하러가기" variant="register" onClick={() => navigate("/login")} />
+          <Button label="로그인하러가기" variant="link" onClick={() => navigate("/login")} />
         </div>
       </main>
     </>
