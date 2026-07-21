@@ -4,7 +4,7 @@ import { apiFetch } from "../api";
 
 const DEFAULT_IMAGE = "/images/default-profile.png";
 
-export default function ProfileHeader() {
+export default function ProfileHeader({ onBack }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,6 +36,11 @@ export default function ProfileHeader() {
 
   return (
     <header className="header">
+      {onBack && (
+        <button className="btn-back" onClick={onBack} aria-label="뒤로가기">
+          ‹
+        </button>
+      )}
       <span className="header-title">아무 말 대잔치</span>
       <div className="header-profile">
         <img

@@ -30,6 +30,38 @@ export default function ProfilePasswordForm({ onUpdated }) {
     isValidPassword(password) &&
     password === passwordConfirm;
 
+  // 입력할 때마다 실시간 검증 → 헬퍼텍스트 즉시 갱신
+  function handlePasswordChange(value) {
+    setPassword(value);
+
+    if (!value) {
+      setPasswordError(""); // 비어 있으면 placeholder가 안내 담당
+    } else if (!isValidPassword(value)) {
+      setPasswordError(PASSWORD_HELPER_DEFAULT);
+    } else {
+      setPasswordError("");
+    }
+
+    // 비밀번호가 바뀌면 확인 필드의 일치 여부도 다시 검사
+    if (passwordConfirm && value !== passwordConfirm) {
+      setPasswordConfirmError("비밀번호가 다릅니다.");
+    } else {
+      setPasswordConfirmError("");
+    }
+  }
+
+  function handlePasswordConfirmChange(value) {
+    setPasswordConfirm(value);
+
+    if (!value) {
+      setPasswordConfirmError("");
+    } else if (value !== password) {
+      setPasswordConfirmError("비밀번호가 다릅니다.");
+    } else {
+      setPasswordConfirmError("");
+    }
+  }
+
   async function handleSubmit() {
     if (isSubmitting) return;
 
@@ -82,12 +114,12 @@ export default function ProfilePasswordForm({ onUpdated }) {
       <PasswordField
         value={password}
         error={passwordError}
-        onChange={setPassword}
+        onChange={handlePasswordChange}
       />
       <PasswordConfirmField
         value={passwordConfirm}
         error={passwordConfirmError}
-        onChange={setPasswordConfirm}
+        onChange={handlePasswordConfirmChange}
       />
       <Button
         label="수정하기"
