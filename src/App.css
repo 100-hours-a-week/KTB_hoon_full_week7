@@ -685,6 +685,35 @@ main {
   gap: 12px;
 }
 
+.comment-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comment-edit-textarea {
+  width: 100%;
+  min-height: 60px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #333;
+  outline: none;
+  resize: none;
+}
+
+.comment-edit-textarea:focus {
+  border-color: #888;
+}
+
+.comment-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
 /* ===== Post detail: 레이아웃 ===== */
 /* 상세는 내용이 길어 세로 가운데정렬 대신 상단 정렬 (전역 main 덮어씀) */
 .detail-main {
@@ -721,4 +750,106 @@ main {
   border: none;
   border-top: 1px solid #ddd;
   margin-bottom: 16px;
+}
+
+/* ===== Post write / edit ===== */
+/* 세로 나열 + 상단 정렬 (전역 main 덮어씀) */
+.write-main {
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: auto;
+  padding: 24px 20px;
+}
+
+.write-main h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 24px;
+}
+
+.form-section {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  color: #333;
+  resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #888;
+}
+
+.form-group textarea {
+  height: 160px;
+}
+
+.image-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.image-group label {
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+}
+
+.image-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 10px;
+  background-color: #fff;
+}
+
+.btn-file {
+  padding: 4px 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-file:hover {
+  background-color: #e0e0e0;
+}
+
+.file-name {
+  font-size: 12px;
+  color: #888;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

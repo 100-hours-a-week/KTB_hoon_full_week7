@@ -1,15 +1,28 @@
 import CommentItem from "./CommentItem";
 
-// comments 배열을 순회하며 CommentItem 렌더 (렌더 책임만)
-export default function CommentList({ comments, onEditComment, onDeleteComment }) {
+export default function CommentList({
+  comments,
+  editingCommentId,
+  editValue,
+  onStartEdit,
+  onDeleteComment,
+  onEditChange,
+  onEditSubmit,
+  onEditCancel,
+}) {
   return (
     <div className="comment-list">
       {comments.map((comment) => (
         <CommentItem
           key={comment.commentId}
           comment={comment}
-          onEdit={() => onEditComment(comment)}
+          isEditing={comment.commentId === editingCommentId}
+          editValue={editValue}
+          onStartEdit={() => onStartEdit(comment)}
           onDelete={() => onDeleteComment(comment.commentId)}
+          onEditChange={onEditChange}
+          onEditSubmit={onEditSubmit}
+          onEditCancel={onEditCancel}
         />
       ))}
     </div>

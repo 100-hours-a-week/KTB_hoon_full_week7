@@ -50,6 +50,41 @@ export default function SignupForm({ onSignupSuccess }) {
     function handleFileChange(file) {
         setPreviewUrl(URL.createObjectURL(file));
     }
+
+    function handleEmailChange(value) {
+        setEmail(value);
+        if (!value) setEmailError("");
+        else if (!isValidEmail(value)) setEmailError(SIGNUP_ERROR_MAP.INVALID_EMAIL_FORMAT);
+        else setEmailError("");
+    }
+
+    function handlePasswordChange(value) {
+        setPassword(value);
+        if (!value) setPasswordError("");
+        else if (!isValidPassword(value)) setPasswordError(SIGNUP_ERROR_MAP.INVALID_PASSWORD_FORMAT);
+        else setPasswordError("");
+
+        if (passwordConfirm && value !== passwordConfirm) {
+            setPasswordConfirmError(SIGNUP_ERROR_MAP.PASSWORD_CONFIRM_MISMATCH);
+        } else {
+            setPasswordConfirmError("");
+        }
+    }
+
+    function handlePasswordConfirmChange(value) {
+        setPasswordConfirm(value);
+        if (!value) setPasswordConfirmError("");
+        else if (value !== password) setPasswordConfirmError(SIGNUP_ERROR_MAP.PASSWORD_CONFIRM_MISMATCH);
+        else setPasswordConfirmError("");
+    }
+
+    function handleNicknameChange(value) {
+        const stripped = value.replace(/\s/g, "");
+        setNickname(stripped);
+        if (!stripped) setNicknameError("");
+        else if (!isValidNickname(stripped)) setNicknameError(SIGNUP_ERROR_MAP.INVALID_NICKNAME_FORMAT);
+        else setNicknameError("");
+    }
     async function handleSignup() {
         setEmailError("");
         setPasswordError("");
@@ -128,10 +163,10 @@ export default function SignupForm({ onSignupSuccess }) {
         <div>
             <h2>회원가입</h2>
             <ProfileImageField previewUrl={previewUrl} onFileChange={handleFileChange} error={imageError} />
-            <EmailField value={email} error={emailError} onChange={setEmail} />
-            <PasswordField value={password} error={passwordError} onChange={setPassword} />
-            <PasswordConfirmField value={passwordConfirm} error={passwordConfirmError} onChange={setPasswordConfirm} />
-            <NicknameField value={nickname} error={nicknameError} onChange={setNickname} />
+            <EmailField value={email} error={emailError} onChange={handleEmailChange} />
+            <PasswordField value={password} error={passwordError} onChange={handlePasswordChange} />
+            <PasswordConfirmField value={passwordConfirm} error={passwordConfirmError} onChange={handlePasswordConfirmChange} />
+            <NicknameField value={nickname} error={nicknameError} onChange={handleNicknameChange} />
             <Button label="회원가입" variant="primary" className={isActive ? "active" : ""} onClick={handleSignup} disabled={!isActive} />
         </div>
     );

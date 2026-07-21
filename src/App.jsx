@@ -6,6 +6,8 @@ import ProfilePage from './pages/ProfilePage';
 import ProfilePasswordPage from './pages/ProfilePasswordPage';
 import PostsPage from './pages/PostsPage';
 import PostDetailPage from './pages/PostDetailPage';
+import PostWritePage from './pages/PostWritePage';
+import PostEditPage from './pages/PostEditPage';
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/profile/password" element={<ProfilePasswordPage />} />
       <Route path="/posts" element={<PostsPage />} />
-      <Route path="/post-detail" element={<PostDetailPage />} />
+      <Route path="/posts/:postId" element={<PostDetailPage />} />
+      <Route path="/post-write" element={<PostWritePage />} />
+      <Route path="/post-edit" element={<PostEditPage />} />
     </Routes>
   );
 }

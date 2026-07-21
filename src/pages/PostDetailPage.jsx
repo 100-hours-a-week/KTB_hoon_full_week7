@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { apiFetch } from "../api";
 import { formatCount, formatDate } from "../utils/format";
 import ProfileHeader from "../components/ProfileHeader";
@@ -12,8 +12,7 @@ import CommentSection from "../components/CommentSection";
 
 export default function PostDetailPage() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const postId = searchParams.get("postId");
+  const { postId } = useParams();
 
   const [post, setPost] = useState(null);
   const [isLiked, setIsLiked] = useState(false);

@@ -45,7 +45,16 @@ export default function ProfileForm({ onUpdated }) {
   }, []);
 
   function handleNicknameChange(value) {
-    setNickname(value.replace(/\s/g, ""));
+    const stripped = value.replace(/\s/g, "");
+    setNickname(stripped);
+
+    if (!stripped) {
+      setNicknameError("");
+    } else if (!isValidNickname(stripped)) {
+      setNicknameError("닉네임은 최대 10자까지 입력 가능합니다.");
+    } else {
+      setNicknameError("");
+    }
   }
 
   function handleFileChange(file) {
