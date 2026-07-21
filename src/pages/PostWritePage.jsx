@@ -21,7 +21,6 @@ export default function PostWritePage() {
     }
   }, [navigate]);
 
-  // 실패 시 에러 메시지를 반환 → PostForm이 표시. 성공 시 상세로 이동.
   async function handleSubmit({ title, content, imageUrl }) {
     try {
       const response = await apiFetch("/posts", {

@@ -4,14 +4,13 @@ import ContentField from "./ContentField";
 import ImageField from "./ImageField";
 import Button from "./Button";
 
-// 실제 업로드가 없어 서버로 보낼 imageUrl은 고정값을 쓴다.
 const DEFAULT_IMAGE_URL = "https://cdn.example.com/post/default.png";
 
 function fileNameFromUrl(imageUrl) {
   return imageUrl ? imageUrl.split("/").pop() : "기존 파일 명";
 }
 
-// 작성/수정 공통 폼. mode와 initialData로 차이를 분기한다.
+// 작성/수정 공통 폼. mode와 initialData로 차이를 분기
 export default function PostForm({ mode, initialData, onSubmit }) {
   const [title, setTitle] = useState(initialData?.title ?? "");
   const [content, setContent] = useState(initialData?.content ?? "");
