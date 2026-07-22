@@ -100,8 +100,9 @@ main {
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 100px);
-  max-width: 480px;
+  max-width: 680px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .login-form {
@@ -475,62 +476,63 @@ main {
 
 .intro {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 14px;
-  color: #444;
-  line-height: 1.8;
+  margin-bottom: 24px;
+  font-size: 15px;
+  color: var(--fg-muted);
+  line-height: 1.7;
 }
 
 .intro strong {
-  font-weight: bold;
+  font-weight: 650;
+  color: var(--fg);
 }
 
 .write-btn-wrapper {
   width: 100%;
-  max-width: 360px;
+  max-width: 600px;
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
-/* Button(btn-primary) 재사용하되 목록용 소형 버튼으로 크기만 조정 */
 .btn-write {
   width: auto;
-  padding: 8px 16px;
+  padding: 7px 14px;
   font-size: 13px;
   margin-top: 0;
 }
 
 .post-list {
   width: 100%;
-  max-width: 360px;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .post-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
   cursor: pointer;
-  transition: box-shadow 0.15s;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.12s, box-shadow 0.12s;
 }
 
 .post-card:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .post-title {
   font-size: 15px;
-  font-weight: bold;
-  color: #222;
-  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 8px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 26ch;
 }
 
 .post-meta {
@@ -542,14 +544,16 @@ main {
 
 .post-stats {
   display: flex;
-  gap: 10px;
-  font-size: 12px;
-  color: #888;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .post-date {
-  font-size: 12px;
-  color: #888;
+  font-size: 13px;
+  color: var(--fg-subtle);
+  font-variant-numeric: tabular-nums;
 }
 
 .post-author {
@@ -559,32 +563,31 @@ main {
 }
 
 .author-img {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
-  background-color: #ccc;
+  background: var(--bg-hover);
 }
 
 .author-name {
   font-size: 13px;
-  color: #555;
+  color: var(--fg-muted);
 }
 
-/* 항상 렌더되어 무한 스크롤 sentinel 역할을 겸한다 (display:none이면 관찰 불가) */
 .loading {
   min-height: 20px;
   text-align: center;
   padding: 20px;
-  color: #888;
+  color: var(--fg-subtle);
   font-size: 13px;
 }
 
 .list-message {
   text-align: center;
-  padding: 40px 20px;
-  color: #888;
+  padding: 48px 20px;
+  color: var(--fg-muted);
   font-size: 14px;
 }
 
@@ -595,38 +598,46 @@ main {
 /* ===== Post detail: 좋아요/조회/댓글 스탯 박스 ===== */
 .stat-box {
   flex: 1;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 10px 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 0;
   text-align: center;
+  transition: border-color 0.12s, background 0.12s;
 }
 
 .stat-box.like-btn {
   cursor: pointer;
 }
 
+.stat-box.like-btn:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-subtle);
+}
+
 .stat-number {
   font-size: 15px;
-  font-weight: bold;
-  color: #222;
+  font-weight: 650;
+  color: var(--fg);
   display: block;
+  font-variant-numeric: tabular-nums;
 }
 
 .stat-label {
   font-size: 11px;
-  color: #888;
+  color: var(--fg-subtle);
   display: block;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
-/* 좋아요 눌린 상태 (원본의 인라인 스타일을 클래스로 이식) */
 .stat-box.liked {
-  background-color: #ACA0EB;
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
-.stat-box.liked .stat-number {
-  color: #7F6AEE;
+.stat-box.liked .stat-number,
+.stat-box.liked .stat-label {
+  color: var(--accent-fg);
 }
 
 /* ===== Post detail: 게시글 헤더 ===== */
@@ -634,11 +645,11 @@ main {
   margin-bottom: 16px;
 }
 
-/* 목록의 .post-title(말줄임)과 충돌하지 않도록 헤더 안으로 스코프 */
 .post-header .post-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: #222;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--fg);
   margin-bottom: 10px;
   white-space: normal;
   overflow: visible;
@@ -658,24 +669,27 @@ main {
 
 .btn-action {
   padding: 5px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
   font-size: 12px;
-  color: #555;
+  font-weight: 500;
+  color: var(--fg-muted);
   cursor: pointer;
+  transition: background 0.12s, color 0.12s;
 }
 
 .btn-action:hover {
-  background-color: #f5f5f5;
+  background: var(--bg-hover);
+  color: var(--fg);
 }
 
 /* ===== Post detail: 댓글 ===== */
 .comment-item {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
 }
 
 .comment-header {
@@ -692,46 +706,56 @@ main {
 
 .btn-comment-action {
   padding: 3px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
   font-size: 11px;
-  color: #555;
+  font-weight: 500;
+  color: var(--fg-muted);
   cursor: pointer;
+  transition: background 0.12s, color 0.12s;
 }
 
 .btn-comment-action:hover {
-  background-color: #f5f5f5;
+  background: var(--bg-hover);
+  color: var(--fg);
 }
 
 .comment-content {
   font-size: 13px;
-  color: #333;
-  line-height: 1.6;
+  color: var(--fg);
+  line-height: 1.65;
 }
 
 /* ===== Post detail: 댓글 입력 ===== */
 .comment-input-section {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 12px 14px;
   margin-bottom: 16px;
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+
+.comment-input-section:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
 }
 
 .comment-textarea {
   width: 100%;
-  height: 80px;
+  height: 72px;
   border: none;
   outline: none;
   font-size: 13px;
   font-family: inherit;
-  color: #333;
+  color: var(--fg);
   resize: none;
+  background: transparent;
 }
 
 .comment-textarea::placeholder {
-  color: #aaa;
+  color: var(--fg-subtle);
 }
 
 .comment-input-footer {
@@ -741,25 +765,27 @@ main {
 }
 
 .btn-comment-submit {
-  padding: 6px 16px;
-  background-color: #ACA0EB;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
+  padding: 6px 14px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
   font-size: 13px;
+  font-weight: 550;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background 0.12s, opacity 0.12s;
 }
 
 .btn-comment-submit.active {
-  background-color: #7F6AEE;
+  background: var(--accent);
 }
 
 .btn-comment-submit:hover {
-  background-color: #9b8fe0;
+  background: var(--accent-hover);
 }
 
 .btn-comment-submit:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -778,18 +804,20 @@ main {
 .comment-edit-textarea {
   width: 100%;
   min-height: 60px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 8px 11px;
   font-size: 13px;
   font-family: inherit;
-  color: #333;
+  color: var(--fg);
   outline: none;
   resize: none;
+  transition: border-color 0.12s, box-shadow 0.12s;
 }
 
 .comment-edit-textarea:focus {
-  border-color: #888;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
 }
 
 .comment-edit-actions {
@@ -816,23 +844,23 @@ main {
   width: 100%;
   height: 180px;
   object-fit: cover;
-  border-radius: 4px;
-  background-color: #ddd;
+  border-radius: var(--radius);
+  background: var(--bg-hover);
   display: block;
   margin-bottom: 16px;
 }
 
 .post-content {
   font-size: 14px;
-  color: #333;
-  line-height: 1.7;
+  color: var(--fg);
+  line-height: 1.75;
   margin-bottom: 20px;
   white-space: pre-wrap;
 }
 
 .divider {
   border: none;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--border);
   margin-bottom: 16px;
 }
 
@@ -846,9 +874,10 @@ main {
 }
 
 .write-main h2 {
-  font-size: 20px;
-  font-weight: bold;
-  color: #222;
+  font-size: 21px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--fg);
   margin-bottom: 24px;
 }
 
@@ -868,26 +897,34 @@ main {
 
 .form-group label {
   font-size: 13px;
-  color: #333;
-  font-weight: 500;
+  color: var(--fg);
+  font-weight: 550;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 13px;
+  padding: 8px 11px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
   font-family: inherit;
   outline: none;
-  color: #333;
+  color: var(--fg);
+  background: var(--bg);
   resize: none;
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--fg-subtle);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #888;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
 }
 
 .form-group textarea {
@@ -902,37 +939,40 @@ main {
 
 .image-group label {
   font-size: 13px;
-  color: #333;
-  font-weight: 500;
+  color: var(--fg);
+  font-weight: 550;
 }
 
 .image-input-wrapper {
   display: flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
   padding: 6px 10px;
-  background-color: #fff;
+  background: var(--bg);
 }
 
 .btn-file {
   padding: 4px 10px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
   font-size: 12px;
+  font-weight: 500;
+  color: var(--fg);
   cursor: pointer;
   white-space: nowrap;
+  transition: background 0.12s;
 }
 
 .btn-file:hover {
-  background-color: #e0e0e0;
+  background: var(--bg-hover);
 }
 
 .file-name {
   font-size: 12px;
-  color: #888;
+  color: var(--fg-subtle);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
