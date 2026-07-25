@@ -8,7 +8,7 @@ export default function ProfileHeader({ onBack }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
-  // 드롭다운이 열려 있을 때만 바깥 클릭 감지. 아무 곳이나 누르면 닫힘
+  // 드롭다운이 열려 있을 때만 바깥 클릭 감지 → 아무 곳이나 누르면 닫힘
   useEffect(() => {
     if (!isOpen) return;
     function handleOutsideClick() {
