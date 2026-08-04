@@ -6,7 +6,7 @@ on:
     types: [completed]
 
 concurrency:
-  group: cd-frontend
+  group: cd-main
   cancel-in-progress: true
 
 permissions:
