@@ -27,7 +27,7 @@ export default function PostForm({ mode, initialData, onSubmit }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isActive = title.trim() && content.trim();
-  const heading = mode === "edit" ? "게시글 수정" : "게시글 작성";
+  const heading = mode === "edit" ? "모집글 수정" : "모집글 작성";
   const submitLabel = mode === "edit" ? "수정하기" : "완료";
 
   function handleFileSelect(file) {

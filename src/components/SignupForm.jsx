@@ -12,7 +12,7 @@ const SIGNUP_ERROR_MAP = {
     EMAIL_REQUIRED: "이메일을 입력해주세요.",
     INVALID_EMAIL_FORMAT: "올바른 이메일 주소 형식을 입력해주세요.",
     PASSWORD_REQUIRED: "비밀번호를 입력해주세요.",
-    INVALID_PASSWORD_FORMAT: "비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.",
+    INVALID_PASSWORD_FORMAT: "영문, 숫자, 특수문자를 각각 최소 1개 포함해 8~20자로 입력해주세요.",
     PASSWORD_CONFIRM_REQUIRED: "비밀번호를 한번 더 입력해주세요.",
     PASSWORD_CONFIRM_MISMATCH: "비밀번호가 다릅니다.",
     NICKNAME_REQUIRED: "닉네임을 입력해주세요.",
@@ -26,8 +26,9 @@ function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+// 서버 @ValidPassword 규칙: 영문·숫자·특수문자 각 1자 이상, 8~20자
 function isValidPassword(password) {
-    return /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,20}$/.test(password);
+    return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,20}$/.test(password);
 }
 
 function isValidNickname(nickname) {
@@ -105,7 +106,7 @@ export default function SignupForm({ onSignupSuccess }) {
             setPasswordError("비밀번호를 입력해주세요.");
             isValid = false;
         } else if (!isValidPassword(password)) {
-            setPasswordError("비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.");
+            setPasswordError(SIGNUP_ERROR_MAP.INVALID_PASSWORD_FORMAT);
             isValid = false;
         }
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfilePasswordForm from "../components/ProfilePasswordForm";
@@ -7,12 +7,6 @@ import Toast from "../components/Toast";
 export default function ProfilePasswordPage() {
   const navigate = useNavigate();
   const [toastMessage, setToastMessage] = useState("");
-
-  useEffect(() => {
-    if (!localStorage.getItem("accessToken")) {
-      navigate("/login");
-    }
-  }, [navigate]);
 
   function handleUpdated(message) {
     setToastMessage(message);

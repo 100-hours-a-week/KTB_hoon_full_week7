@@ -8,8 +8,8 @@ import PostList from "../components/PostList";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ListMessage from "../components/ListMessage";
 
-const LOAD_ERROR_MESSAGE = "게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.";
-const EMPTY_MESSAGE = "아직 게시글이 없습니다.";
+const LOAD_ERROR_MESSAGE = "모집글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.";
+const EMPTY_MESSAGE = "아직 등록된 모집글이 없습니다.";
 
 export default function PostsPage() {
   const navigate = useNavigate();
@@ -22,13 +22,6 @@ export default function PostsPage() {
 
   // 관찰할 DOM(로딩 표시)을 가리키는 용도. 이 ref 하나만 쓴다.
   const sentinelRef = useRef(null);
-
-  // 로그인 안 했으면 로그인 페이지로 보낸다.
-  useEffect(() => {
-    if (!localStorage.getItem("accessToken")) {
-      navigate("/login");
-    }
-  }, [navigate]);
 
   // 무한 스크롤
   // nextCursor / hasNext / isLoading 이 바뀌면 이 useEffect가 다시 실행
@@ -93,7 +86,7 @@ export default function PostsPage() {
 
         <div className="write-btn-wrapper">
           <Button
-            label="게시글 작성"
+            label="모집글 작성"
             variant="primary"
             className="btn-write"
             onClick={() => navigate("/post-write")}

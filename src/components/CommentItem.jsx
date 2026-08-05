@@ -1,5 +1,5 @@
 import AuthorInfo from "./AuthorInfo";
-import CommentActions from "./CommentActions";
+import KebabMenu from "./KebabMenu";
 import { formatDate } from "../utils/format";
 
 export default function CommentItem({
@@ -8,10 +8,18 @@ export default function CommentItem({
   editValue,
   onStartEdit,
   onDelete,
+  onReport,
   onEditChange,
   onEditSubmit,
   onEditCancel,
 }) {
+  const menuItems = comment.isMine
+    ? [
+        { label: "수정", onClick: onStartEdit },
+        { label: "삭제", onClick: onDelete, danger: true },
+      ]
+    : [{ label: "신고", onClick: onReport, danger: true }];
+
   return (
     <div className="comment-item">
       <div className="comment-header">
@@ -19,9 +27,7 @@ export default function CommentItem({
           nickname={comment.writerNickname}
           date={formatDate(comment.createdAt)}
         />
-        {comment.isMine && !isEditing && (
-          <CommentActions onEdit={onStartEdit} onDelete={onDelete} />
-        )}
+        {!isEditing && <KebabMenu items={menuItems} ariaLabel="댓글 메뉴" />}
       </div>
 
       {isEditing ? (

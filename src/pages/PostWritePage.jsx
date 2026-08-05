@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiFetch } from "../api";
 import ProfileHeader from "../components/ProfileHeader";
@@ -9,17 +8,11 @@ const ERROR_MAP = {
   TITLE_LENGTH_EXCEEDED: "제목은 최대 30자까지 입력 가능합니다.",
   CONTENT_REQUIRED: "내용을 입력해주세요.",
   IMAGE_REQUIRED: "이미지를 선택해주세요.",
-  POST_RATE_LIMIT_EXCEEDED: "게시글을 너무 자주 작성했습니다. 잠시 후 다시 시도해주세요.",
+  POST_RATE_LIMIT_EXCEEDED: "모집글을 너무 자주 등록했습니다. 잠시 후 다시 시도해주세요.",
 };
 
 export default function PostWritePage() {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!localStorage.getItem("accessToken")) {
-      navigate("/login");
-    }
-  }, [navigate]);
 
   async function handleSubmit({ title, content, imageUrl }) {
     try {
@@ -30,7 +23,7 @@ export default function PostWritePage() {
       const data = await response.json();
 
       if (!response.ok) {
-        return ERROR_MAP[data.code] || "게시글 작성에 실패했습니다.";
+        return ERROR_MAP[data.code] || "모집글 등록에 실패했습니다.";
       }
       navigate(`/posts/${data.data.postId}`);
     } catch (err) {

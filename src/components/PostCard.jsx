@@ -5,7 +5,7 @@ export default function PostCard({ post, onClick }) {
   return (
     <div className="post-card" onClick={onClick}>
       <p className="post-title">
-        {post.isBlind ? "숨김 처리된 게시글" : post.title}
+        {post.isBlind ? "숨김 처리된 모집글" : post.title}
       </p>
 
       {/* 좋아요/댓글/조회수 + 날짜 — PostCard 안에 인라인 */}

@@ -14,7 +14,7 @@ export default function CommentForm({
     <div className="comment-input-section">
       <textarea
         className="comment-textarea"
-        placeholder="댓글을 남겨주세요!"
+        placeholder="관심 있다면 댓글을 남겨주세요!"
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />

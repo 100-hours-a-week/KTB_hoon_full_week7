@@ -8,8 +8,8 @@ const ERROR_MAP = {
     EMAIL_REQUIRED: "이메일을 입력해주세요.",
     INVALID_EMAIL_FORMAT: "올바른 이메일 형식이 아닙니다.",
     PASSWORD_REQUIRED: "비밀번호를 입력해주세요.",
-    MEMBER_NOT_FOUND: "존재하지 않는 이메일입니다.",
-    PASSWORD_MISMATCH: "비밀번호가 올바르지 않습니다.",
+    // 이메일 미존재·비밀번호 불일치는 서버가 LOGIN_FAILED 하나로 통일해 내려준다.
+    LOGIN_FAILED: "이메일 또는 비밀번호가 올바르지 않습니다.",
 };
 
 function isValidEmail(email) {
@@ -48,7 +48,13 @@ export default function LoginForm({ onLoginSuccess }) {
             });
             const data = await response.json();
             if (!response.ok) {
-                setEmailError(ERROR_MAP[data.code] || "로그인에 실패했습니다.");
+                const message = ERROR_MAP[data.code] || "로그인에 실패했습니다.";
+                // 이메일 관련 코드는 이메일 필드에, 그 외(비밀번호/로그인 실패)는 비밀번호 필드에 표시
+                if (data.code === "EMAIL_REQUIRED" || data.code === "INVALID_EMAIL_FORMAT") {
+                    setEmailError(message);
+                } else {
+                    setPasswordError(message);
+                }
                 return;
             }
             onLoginSuccess(data.data.accessToken);

@@ -41,7 +41,7 @@ export default function ProfileHeader({ onBack }) {
           ‹
         </button>
       )}
-      <span className="header-title">문의사항 게시판</span>
+      <span className="header-title">모집 게시판</span>
       <div className="header-profile">
         <img
           className="profile-icon"

@@ -1,4 +1,4 @@
-export default function Header({ title = "문의사항 게시판", onBack }) {
+export default function Header({ title = "모집 게시판", onBack }) {
   return (
     <header className="title-bar">
       {onBack && (

@@ -409,10 +409,57 @@ main {
   margin-bottom: 24px;
 }
 
+/* 신고 사유 선택 목록 */
+.report-reason-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.report-reason {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--fg);
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.report-reason:hover {
+  background: var(--bg-hover);
+}
+
+.report-reason.selected {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+.report-reason input {
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.report-error {
+  font-size: 12px;
+  color: var(--red-fg);
+  margin-bottom: 16px;
+}
+
 .modal-btn-group {
   display: flex;
   gap: 8px;
   justify-content: center;
+}
+
+.modal-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .modal-btn {
@@ -645,12 +692,21 @@ main {
   margin-bottom: 16px;
 }
 
+/* 제목 + 우측 상단 케밥 메뉴 */
+.post-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
 .post-header .post-title {
   font-size: 20px;
   font-weight: 650;
   letter-spacing: -0.02em;
   color: var(--fg);
-  margin-bottom: 10px;
+  margin-bottom: 0;
   white-space: normal;
   overflow: visible;
   max-width: none;
@@ -662,26 +718,73 @@ main {
   justify-content: space-between;
 }
 
-.post-actions {
-  display: flex;
-  gap: 6px;
+/* ===== 케밥(⋮) 메뉴 ===== */
+.kebab-menu {
+  position: relative;
+  flex-shrink: 0;
 }
 
-.btn-action {
-  padding: 5px 12px;
-  border: 1px solid var(--border-strong);
+.kebab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
   border-radius: var(--radius-sm);
-  background: var(--bg);
-  font-size: 12px;
-  font-weight: 500;
+  background: none;
+  font-size: 18px;
+  line-height: 1;
   color: var(--fg-muted);
   cursor: pointer;
   transition: background 0.12s, color 0.12s;
 }
 
-.btn-action:hover {
+.kebab-btn:hover {
   background: var(--bg-hover);
   color: var(--fg);
+}
+
+.kebab-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  min-width: 120px;
+  padding: 4px;
+  z-index: 100;
+}
+
+.kebab-item {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 450;
+  color: var(--fg-muted);
+  cursor: pointer;
+  text-align: left;
+}
+
+.kebab-item:hover {
+  background: var(--bg-hover);
+  color: var(--fg);
+}
+
+.kebab-item.danger {
+  color: var(--red-fg);
+}
+
+.kebab-item.danger:hover {
+  background: var(--red-bg);
+  color: var(--red-fg);
 }
 
 /* ===== Post detail: 댓글 ===== */
@@ -699,11 +802,7 @@ main {
   margin-bottom: 8px;
 }
 
-.comment-actions {
-  display: flex;
-  gap: 6px;
-}
-
+/* 댓글 수정 모드의 취소/저장 버튼 */
 .btn-comment-action {
   padding: 3px 10px;
   border: 1px solid var(--border-strong);

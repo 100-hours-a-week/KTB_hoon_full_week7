@@ -9,8 +9,9 @@ const ERROR_MAP = {
   TITLE_LENGTH_EXCEEDED: "제목은 최대 30자까지 입력 가능합니다.",
   CONTENT_REQUIRED: "내용을 입력해주세요.",
   IMAGE_REQUIRED: "이미지를 선택해주세요.",
-  NOT_POST_WRITER: "게시글 작성자만 수정할 수 있습니다.",
-  POST_NOT_FOUND: "게시글을 찾을 수 없습니다.",
+  POST_IMAGE_REQUIRED: "이미지를 등록해주세요.",
+  NOT_POST_WRITER: "작성자만 수정할 수 있습니다.",
+  POST_NOT_FOUND: "모집글을 찾을 수 없습니다.",
   POST_RATE_LIMIT_EXCEEDED: "요청이 너무 잦습니다. 잠시 후 다시 시도해주세요.",
 };
 
@@ -24,10 +25,6 @@ export default function PostEditPage() {
 
   // 기존 게시글 로드 (수정 페이지만의 책임). 내 글이 아니면 상세로 되돌린다.
   useEffect(() => {
-    if (!localStorage.getItem("accessToken")) {
-      navigate("/login");
-      return;
-    }
     async function loadPost() {
       try {
         const response = await apiFetch(`/posts/${postId}`);
@@ -62,7 +59,7 @@ export default function PostEditPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        return ERROR_MAP[data.code] || "게시글 수정에 실패했습니다.";
+        return ERROR_MAP[data.code] || "모집글 수정에 실패했습니다.";
       }
       navigate(`/posts/${postId}`);
     } catch (err) {

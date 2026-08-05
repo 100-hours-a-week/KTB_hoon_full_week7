@@ -12,7 +12,7 @@ export default function SignupPage() {
 
   return (
     <>
-      <Header title="문의사항 게시판" onBack={() => navigate("/login")} />
+      <Header title="모집 게시판" onBack={() => navigate("/login")} />
       <main>
         <div className="login-form">
           <SignupForm onSignupSuccess={handleSignupSuccess} />

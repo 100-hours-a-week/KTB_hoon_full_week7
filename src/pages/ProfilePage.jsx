@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiFetch } from "../api";
 import ProfileHeader from "../components/ProfileHeader";
@@ -11,12 +11,6 @@ export default function ProfilePage() {
   const navigate = useNavigate();
   const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
-
-  useEffect(() => {
-    if (!localStorage.getItem("accessToken")) {
-      navigate("/login");
-    }
-  }, [navigate]);
 
   function showToast(message) {
     setToastMessage(message);

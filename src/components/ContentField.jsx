@@ -8,7 +8,7 @@ export default function ContentField({ value, error, onChange }) {
       <textarea
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="내용을 입력해주세요."
+        placeholder="모집 분야, 인원, 기간 등 모집 내용을 자세히 적어주세요."
       />
       <HelperText message={error} />
     </div>

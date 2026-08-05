@@ -4,7 +4,12 @@ import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 import CommentDeleteModal from "./CommentDeleteModal";
 
-export default function CommentSection({ postId, comments, onCommentsChanged }) {
+export default function CommentSection({
+  postId,
+  comments,
+  onCommentsChanged,
+  onReportComment,
+}) {
   const [commentInputValue, setCommentInputValue] = useState("");
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingValue, setEditingValue] = useState("");
@@ -104,6 +109,7 @@ export default function CommentSection({ postId, comments, onCommentsChanged }) 
         editValue={editingValue}
         onStartEdit={startEdit}
         onDeleteComment={openDeleteModal}
+        onReportComment={onReportComment}
         onEditChange={setEditingValue}
         onEditSubmit={submitEdit}
         onEditCancel={cancelEdit}

@@ -6,6 +6,7 @@ export default function CommentList({
   editValue,
   onStartEdit,
   onDeleteComment,
+  onReportComment,
   onEditChange,
   onEditSubmit,
   onEditCancel,
@@ -20,6 +21,7 @@ export default function CommentList({
           editValue={editValue}
           onStartEdit={() => onStartEdit(comment)}
           onDelete={() => onDeleteComment(comment.commentId)}
+          onReport={() => onReportComment(comment.commentId)}
           onEditChange={onEditChange}
           onEditSubmit={onEditSubmit}
           onEditCancel={onEditCancel}
