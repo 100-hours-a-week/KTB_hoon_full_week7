@@ -1076,3 +1076,115 @@ main {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* ===== 임시저장 ===== */
+.btn-drafts-open {
+  align-self: flex-end;
+  padding: 4px 2px;
+  background: none;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg-muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.btn-drafts-open:hover {
+  color: var(--fg);
+}
+
+/* 완료 + 임시저장 버튼 한 줄 배치 */
+.write-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.write-actions > * {
+  flex: 1;
+}
+
+.write-actions .btn-primary {
+  margin-top: 0;
+}
+
+.btn-draft {
+  padding: 9px 16px;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 550;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.btn-draft:hover:not(:disabled) {
+  background: var(--bg-hover);
+}
+
+.btn-draft:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 임시저장 글 목록 (모달) */
+.draft-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+  max-height: 260px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.draft-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+}
+
+.draft-load {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: var(--fg);
+  cursor: pointer;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.draft-load:hover {
+  color: var(--accent);
+}
+
+.draft-delete {
+  flex-shrink: 0;
+  width: 32px;
+  align-self: stretch;
+  background: none;
+  border: none;
+  border-left: 1px solid var(--border);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--fg-subtle);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.draft-delete:hover {
+  background: var(--red-bg);
+  color: var(--red-fg);
+}

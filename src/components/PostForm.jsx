@@ -10,23 +10,33 @@ function fileNameFromUrl(imageUrl) {
   return imageUrl ? imageUrl.split("/").pop() : "기존 파일 명";
 }
 
-// 작성/수정 공통 폼. mode와 initialData로 차이를 분기
-export default function PostForm({ mode, initialData, onSubmit }) {
+// 작성/수정 공통 폼. mode와 initialData로 차이를 분기.
+// write 모드에서는 임시저장(onSaveDraft)·불러오기(onOpenDrafts)를 추가로 노출한다.
+export default function PostForm({
+  mode,
+  initialData,
+  onSubmit,
+  onSaveDraft,
+  onOpenDrafts,
+  savingDraft = false,
+}) {
   const [title, setTitle] = useState(initialData?.title ?? "");
   const [content, setContent] = useState(initialData?.content ?? "");
   const [imageUrl, setImageUrl] = useState(
     initialData?.imageUrl ?? DEFAULT_IMAGE_URL
   );
-  const [fileName, setFileName] = useState(
-    mode === "edit"
-      ? fileNameFromUrl(initialData?.imageUrl)
-      : "파일을 선택해주세요."
-  );
+  const [fileName, setFileName] = useState(() => {
+    if (initialData?.imageUrl) return fileNameFromUrl(initialData.imageUrl);
+    return mode === "edit" ? "기존 파일 명" : "파일을 선택해주세요.";
+  });
   const [titleError, setTitleError] = useState("");
   const [contentError, setContentError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isActive = title.trim() && content.trim();
+  const isWrite = mode !== "edit";
+  // 임시저장은 제목/내용 중 하나라도 있으면 가능(둘 다 비면 저장할 게 없음)
+  const canSaveDraft = isWrite && (title.trim() || content.trim());
   const heading = mode === "edit" ? "모집글 수정" : "모집글 작성";
   const submitLabel = mode === "edit" ? "수정하기" : "완료";
 
@@ -69,10 +79,22 @@ export default function PostForm({ mode, initialData, onSubmit }) {
     }
   }
 
+  // 임시저장은 검증 없이 현재 값을 그대로 넘긴다(빈 필드 허용).
+  function handleSaveDraft() {
+    if (!canSaveDraft || savingDraft) return;
+    onSaveDraft({ title: title.trim(), content: content.trim(), imageUrl });
+  }
+
   return (
     <main className="write-main">
       <h2>{heading}</h2>
       <div className="form-section">
+        {isWrite && (
+          <button type="button" className="btn-drafts-open" onClick={onOpenDrafts}>
+            임시저장 글 불러오기
+          </button>
+        )}
+
         <TitleField value={title} error={titleError} onChange={setTitle} />
         <ContentField
           value={content}
@@ -80,13 +102,35 @@ export default function PostForm({ mode, initialData, onSubmit }) {
           onChange={setContent}
         />
         <ImageField fileName={fileName} onFileSelect={handleFileSelect} />
-        <Button
-          label={submitLabel}
-          variant="primary"
-          className={isActive ? "active" : ""}
-          onClick={handleSubmit}
-          disabled={!isActive || isSubmitting}
-        />
+
+        {isWrite ? (
+          <div className="write-actions">
+            <button
+              type="button"
+              className="btn-draft"
+              onClick={handleSaveDraft}
+              disabled={!canSaveDraft || savingDraft || isSubmitting}
+            >
+              {savingDraft ? "저장 중..." : "임시저장"}
+            </button>
+            <button
+              type="button"
+              className={`btn-primary${isActive ? " active" : ""}`}
+              onClick={handleSubmit}
+              disabled={!isActive || isSubmitting}
+            >
+              {submitLabel}
+            </button>
+          </div>
+        ) : (
+          <Button
+            label={submitLabel}
+            variant="primary"
+            className={isActive ? "active" : ""}
+            onClick={handleSubmit}
+            disabled={!isActive || isSubmitting}
+          />
+        )}
       </div>
     </main>
   );
