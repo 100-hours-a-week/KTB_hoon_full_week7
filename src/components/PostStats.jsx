@@ -1,4 +1,5 @@
 import LikeButton from "./LikeButton";
+import { EyeIcon, CommentIcon } from "./icons";
 
 // 좋아요(클릭 가능) + 조회수 + 댓글 수 박스 3개
 export default function PostStats({
@@ -18,10 +19,12 @@ export default function PostStats({
         onClick={onLikeClick}
       />
       <div className="stat-box">
+        <EyeIcon className="stat-icon" />
         <span className="stat-number">{viewCount}</span>
         <span className="stat-label">조회수</span>
       </div>
       <div className="stat-box">
+        <CommentIcon className="stat-icon" />
         <span className="stat-number">{commentCount}</span>
         <span className="stat-label">댓글</span>
       </div>

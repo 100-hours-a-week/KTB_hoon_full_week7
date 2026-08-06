@@ -36,29 +36,33 @@ export default function ProfileHeader({ onBack }) {
 
   return (
     <header className="header">
-      {onBack && (
-        <button className="btn-back" onClick={onBack} aria-label="뒤로가기">
-          ‹
-        </button>
-      )}
-      <span className="header-title">모집 게시판</span>
-      <div className="header-profile">
-        <img
-          className="profile-icon"
-          src={DEFAULT_IMAGE}
-          alt="프로필"
-          onClick={toggleDropdown}
-        />
-        <div className={`dropdown${isOpen ? " show" : ""}`}>
-          <button className="dropdown-item" onClick={() => navigate("/profile")}>
-            회원정보수정
+      <div className="nav-inner">
+        {onBack && (
+          <button className="btn-back" onClick={onBack} aria-label="뒤로가기">
+            ‹
           </button>
-          <button className="dropdown-item" onClick={() => navigate("/profile/password")}>
-            비밀번호수정
-          </button>
-          <button className="dropdown-item" onClick={handleLogout}>
-            로그아웃
-          </button>
+        )}
+        <span className="header-title brand" onClick={() => navigate("/posts")}>
+          모집 게시판
+        </span>
+        <div className="header-profile">
+          <img
+            className="profile-icon"
+            src={DEFAULT_IMAGE}
+            alt="프로필"
+            onClick={toggleDropdown}
+          />
+          <div className={`dropdown${isOpen ? " show" : ""}`}>
+            <button className="dropdown-item" onClick={() => navigate("/profile")}>
+              회원정보수정
+            </button>
+            <button className="dropdown-item" onClick={() => navigate("/profile/password")}>
+              비밀번호수정
+            </button>
+            <button className="dropdown-item" onClick={handleLogout}>
+              로그아웃
+            </button>
+          </div>
         </div>
       </div>
     </header>
