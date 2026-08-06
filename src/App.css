@@ -2194,11 +2194,230 @@ main {
   margin-bottom: 16px;
   font-size: 14px;
   color: var(--fg-muted);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
 }
 
 .search-result-head strong {
   color: var(--accent);
   font-weight: 700;
+}
+
+/* ---- filter toggle + panel ---- */
+.btn-filter-toggle {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  background: var(--paper);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--fg);
+  cursor: pointer;
+  transition: border-color 0.14s, color 0.14s, background 0.14s;
+}
+
+.btn-filter-toggle:hover,
+.btn-filter-toggle.open {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filter-ic {
+  width: 17px;
+  height: 17px;
+}
+
+.filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.filter-panel {
+  width: 100%;
+  max-width: var(--content-max);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: rise 0.3s ease both;
+}
+
+.filter-block {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.filter-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--fg-subtle);
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+}
+
+.filter-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.filter-panel input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-family: inherit;
+  outline: none;
+  color: var(--fg);
+  background: var(--bg);
+  transition: border-color 0.14s, box-shadow 0.14s;
+}
+
+.filter-panel input::placeholder {
+  color: var(--fg-subtle);
+}
+
+.filter-panel input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
+}
+
+.address-grid.two {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* 지역 드롭다운 */
+.region-select {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.region-dropdown {
+  width: 100%;
+  padding: 11px 34px 11px 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-family: inherit;
+  color: var(--fg);
+  background-color: var(--bg);
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a6558' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  background-size: 13px;
+  transition: border-color 0.14s, box-shadow 0.14s;
+}
+
+.region-dropdown:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
+}
+
+.region-dropdown:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background-color: var(--bg-subtle);
+}
+
+.filter-dates {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.date-sep {
+  color: var(--fg-subtle);
+  flex-shrink: 0;
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+}
+
+.filter-actions .btn-primary,
+.filter-actions .btn-draft {
+  width: auto;
+  margin-top: 0;
+  padding: 10px 26px;
+}
+
+.search-error {
+  width: 100%;
+  max-width: var(--content-max);
+  font-size: 13px;
+  color: var(--red-fg);
+  margin: 0;
+}
+
+.search-error.toolbar-error {
+  margin-bottom: 14px;
+}
+
+/* ---- applied filter chips ---- */
+.applied-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.applied-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px 5px 12px;
+  background: var(--accent-subtle);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--accent);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.applied-chip span {
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.applied-chip:hover {
+  background: #dde2fe;
 }
 
 @media (max-width: 560px) {

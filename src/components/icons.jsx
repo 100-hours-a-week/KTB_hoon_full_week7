@@ -53,6 +53,26 @@ export function SearchIcon({ className }) {
   );
 }
 
+export function FilterIcon({ className }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <circle cx="15" cy="8" r="2.4" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+      <circle cx="9" cy="16" r="2.4" />
+    </svg>
+  );
+}
+
 export function PinIcon({ className }) {
   return (
     <svg

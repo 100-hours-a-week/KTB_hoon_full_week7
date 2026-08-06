@@ -3,6 +3,7 @@ import TitleField from "./TitleField";
 import ContentField from "./ContentField";
 import ImageField from "./ImageField";
 import Button from "./Button";
+import RegionSelect from "./RegionSelect";
 import { CATEGORIES, MEETING_TYPES } from "../constants/recruit";
 
 const DEFAULT_IMAGE_URL = "https://cdn.example.com/post/default.png";
@@ -207,23 +208,18 @@ export default function PostForm({
         {isOffline && (
           <div className="form-group">
             <label>지역*</label>
-            <div className="address-grid">
-              <input
-                value={sido}
-                onChange={(e) => setSido(e.target.value)}
-                placeholder="시/도"
-              />
-              <input
-                value={sigungu}
-                onChange={(e) => setSigungu(e.target.value)}
-                placeholder="시/군/구"
-              />
-              <input
-                value={eupmyeondong}
-                onChange={(e) => setEupmyeondong(e.target.value)}
-                placeholder="읍/면/동"
-              />
-            </div>
+            <RegionSelect
+              sido={sido}
+              sigungu={sigungu}
+              onSidoChange={setSido}
+              onSigunguChange={setSigungu}
+            />
+            <input
+              className="address-detail"
+              value={eupmyeondong}
+              onChange={(e) => setEupmyeondong(e.target.value)}
+              placeholder="읍/면/동"
+            />
             <input
               className="address-detail"
               value={detail}
