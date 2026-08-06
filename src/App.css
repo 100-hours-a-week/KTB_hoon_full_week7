@@ -1,5 +1,5 @@
 /* ============================================================
-   모집 게시판 — Editorial recruitment board
+   Let's Meet — Editorial recruitment board
    Warm paper canvas · ink type · electric cobalt accent
    Pretendard (UI/KR) + JetBrains Mono (numerals/meta)
    ============================================================ */
@@ -1909,6 +1909,303 @@ main {
   .post-header .post-title { font-size: 22px; }
   .post-image { height: 220px; }
   .hero-title { font-size: clamp(32px, 11vw, 44px); }
+}
+
+/* ============================================================
+   Recruit fields — form controls
+   ============================================================ */
+
+.cat-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  font-size: 13px;
+  font-weight: 550;
+  font-family: inherit;
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s, color 0.12s;
+}
+
+.cat-chip:hover {
+  border-color: var(--fg-subtle);
+}
+
+.cat-chip.selected {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+  color: var(--accent);
+  font-weight: 650;
+}
+
+.cat-emoji {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.segmented {
+  display: flex;
+  gap: 8px;
+}
+
+.seg-option {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  font-size: 13.5px;
+  font-weight: 550;
+  font-family: inherit;
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s, color 0.12s;
+}
+
+.seg-option.selected {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+  color: var(--accent);
+  font-weight: 650;
+}
+
+.address-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.address-detail {
+  margin-top: 8px;
+}
+
+/* ============================================================
+   Recruit meta — card badges / status / info line
+   ============================================================ */
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.cat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.status-pill {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.status-pill.recruiting {
+  background: var(--green-bg);
+  color: var(--green-fg);
+}
+
+.status-pill.closed {
+  background: var(--gray-bg);
+  color: var(--gray-fg);
+}
+
+.card-recruit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-bottom: 15px;
+  font-size: 12.5px;
+  color: var(--fg-muted);
+}
+
+.card-recruit > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.recruit-ic {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.post-card.closed {
+  opacity: 0.72;
+}
+
+.post-card.closed .post-title {
+  color: var(--fg-muted);
+}
+
+/* detail panel */
+.recruit-panel {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 22px;
+}
+
+.recruit-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.recruit-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recruit-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-size: 14px;
+}
+
+.recruit-row dt {
+  flex-shrink: 0;
+  width: 68px;
+  color: var(--fg-subtle);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.recruit-row dd {
+  color: var(--fg);
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* ============================================================
+   Posts toolbar + search
+   ============================================================ */
+
+.posts-toolbar {
+  width: 100%;
+  max-width: var(--content-max);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 18px;
+}
+
+.search-form {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--paper);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: 10px 16px;
+  transition: border-color 0.14s, box-shadow 0.14s;
+}
+
+.search-form:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
+}
+
+.search-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--fg-subtle);
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--fg);
+}
+
+.search-input::placeholder {
+  color: var(--fg-subtle);
+}
+
+.search-clear {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 50%;
+  background: var(--bg-hover);
+  color: var(--fg-muted);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s;
+}
+
+.search-clear:hover {
+  background: var(--border-strong);
+  color: var(--fg);
+}
+
+.posts-toolbar .btn-write {
+  flex-shrink: 0;
+}
+
+.search-result-head {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--fg-muted);
+}
+
+.search-result-head strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+@media (max-width: 560px) {
+  .posts-toolbar { flex-wrap: wrap; }
+  .search-form { order: 2; flex-basis: 100%; }
+  .posts-toolbar .btn-write { order: 1; margin-left: auto; }
+  .address-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

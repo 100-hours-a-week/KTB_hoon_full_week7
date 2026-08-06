@@ -3,16 +3,12 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { apiFetch } from "../api";
 import ProfileHeader from "../components/ProfileHeader";
 import PostForm from "../components/PostForm";
+import { RECRUIT_ERROR_MESSAGES } from "../constants/recruit";
 
 const ERROR_MAP = {
-  TITLE_REQUIRED: "제목을 입력해주세요.",
-  TITLE_LENGTH_EXCEEDED: "제목은 최대 30자까지 입력 가능합니다.",
-  CONTENT_REQUIRED: "내용을 입력해주세요.",
-  IMAGE_REQUIRED: "이미지를 선택해주세요.",
-  POST_IMAGE_REQUIRED: "이미지를 등록해주세요.",
+  ...RECRUIT_ERROR_MESSAGES,
   NOT_POST_WRITER: "작성자만 수정할 수 있습니다.",
   POST_NOT_FOUND: "모집글을 찾을 수 없습니다.",
-  POST_RATE_LIMIT_EXCEEDED: "요청이 너무 잦습니다. 잠시 후 다시 시도해주세요.",
 };
 
 export default function PostEditPage() {
@@ -39,6 +35,11 @@ export default function PostEditPage() {
             title: post.title,
             content: post.content,
             imageUrl: post.imageUrl,
+            category: post.category,
+            meetingType: post.meetingType,
+            address: post.address,
+            placeName: post.placeName,
+            capacity: post.capacity,
           });
           setIsLoading(false);
         }
@@ -50,11 +51,11 @@ export default function PostEditPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId]);
 
-  async function handleSubmit({ title, content, imageUrl }) {
+  async function handleSubmit(payload) {
     try {
       const response = await apiFetch(`/posts/${postId}`, {
         method: "PATCH",
-        body: JSON.stringify({ title, content, imageUrl }),
+        body: JSON.stringify(payload),
       });
       const data = await response.json();
 

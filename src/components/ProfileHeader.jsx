@@ -43,7 +43,7 @@ export default function ProfileHeader({ onBack }) {
           </button>
         )}
         <span className="header-title brand" onClick={() => navigate("/posts")}>
-          모집 게시판
+          Let&apos;s Meet
         </span>
         <div className="header-profile">
           <img

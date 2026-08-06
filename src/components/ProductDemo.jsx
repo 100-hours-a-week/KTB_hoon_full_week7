@@ -9,7 +9,7 @@ export default function ProductDemo() {
           <span className="demo-dot"></span>
           <span className="demo-dot"></span>
           <span className="demo-dot"></span>
-          <span className="demo-title">모집 게시판</span>
+          <span className="demo-title">Let&apos;s Meet</span>
         </div>
 
         <div className="demo-screen">

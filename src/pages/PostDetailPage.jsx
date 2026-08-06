@@ -5,6 +5,7 @@ import { formatCount, formatDate } from "../utils/format";
 import ProfileHeader from "../components/ProfileHeader";
 import PostHeader from "../components/PostHeader";
 import PostImage from "../components/PostImage";
+import PostRecruitInfo from "../components/PostRecruitInfo";
 import PostBody from "../components/PostBody";
 import PostStats from "../components/PostStats";
 import PostDeleteModal from "../components/PostDeleteModal";
@@ -155,6 +156,8 @@ export default function PostDetailPage() {
                 onDelete={() => setPostDeleteModalOpen(true)}
                 onReport={() => openReport({ type: "POST", id: Number(postId) })}
               />
+
+              {!post.isBlind && <PostRecruitInfo post={post} />}
 
               {post.imageUrl && <PostImage imageUrl={post.imageUrl} />}
 

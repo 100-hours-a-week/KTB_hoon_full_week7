@@ -5,13 +5,10 @@ import ProfileHeader from "../components/ProfileHeader";
 import PostForm from "../components/PostForm";
 import DraftsModal from "../components/DraftsModal";
 import Toast from "../components/Toast";
+import { RECRUIT_ERROR_MESSAGES } from "../constants/recruit";
 
 const ERROR_MAP = {
-  TITLE_REQUIRED: "제목을 입력해주세요.",
-  TITLE_LENGTH_EXCEEDED: "제목은 최대 30자까지 입력 가능합니다.",
-  CONTENT_REQUIRED: "내용을 입력해주세요.",
-  IMAGE_REQUIRED: "이미지를 선택해주세요.",
-  POST_RATE_LIMIT_EXCEEDED: "모집글을 너무 자주 등록했습니다. 잠시 후 다시 시도해주세요.",
+  ...RECRUIT_ERROR_MESSAGES,
   NOT_POST_DRAFT_WRITER: "본인의 임시저장 글만 발행할 수 있습니다.",
   POST_DRAFT_NOT_FOUND: "임시저장 글을 찾을 수 없습니다.",
 };
@@ -36,12 +33,12 @@ export default function PostWritePage() {
   }
 
   // 발행: 임시저장에서 온 글이면 publish, 아니면 일반 생성
-  async function handleSubmit({ title, content, imageUrl }) {
+  async function handleSubmit(payload) {
     const path = draftId ? `/posts/drafts/${draftId}/publish` : "/posts";
     try {
       const response = await apiFetch(path, {
         method: "POST",
-        body: JSON.stringify({ title, content, imageUrl }),
+        body: JSON.stringify(payload),
       });
       const data = await response.json();
 
