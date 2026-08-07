@@ -2,16 +2,14 @@ import {
   categoryEmoji,
   categoryLabel,
   meetingLabel,
-  formatAddress,
+  formatAddressOnly,
 } from "../constants/recruit";
 
 // 상세 페이지 모집 정보 패널
 export default function PostRecruitInfo({ post }) {
   const isOnline = post.meetingType === "ONLINE";
   const isClosed = post.recruitStatus === "CLOSED";
-  const location = isOnline
-    ? post.placeName
-    : formatAddress(post.address, post.placeName);
+  const address = formatAddressOnly(post.address);
 
   return (
     <div className="recruit-panel">
@@ -30,9 +28,15 @@ export default function PostRecruitInfo({ post }) {
           <dt>모임 방식</dt>
           <dd>{meetingLabel(post.meetingType)}</dd>
         </div>
+        {!isOnline && (
+          <div className="recruit-row">
+            <dt>주소</dt>
+            <dd>{address || "-"}</dd>
+          </div>
+        )}
         <div className="recruit-row">
           <dt>{isOnline ? "장소" : "위치"}</dt>
-          <dd>{location || "-"}</dd>
+          <dd>{post.placeName || "-"}</dd>
         </div>
         {post.capacity != null && (
           <div className="recruit-row">

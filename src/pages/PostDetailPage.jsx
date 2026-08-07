@@ -7,8 +7,8 @@ import PostHeader from "../components/PostHeader";
 import PostImage from "../components/PostImage";
 import PostRecruitInfo from "../components/PostRecruitInfo";
 import PostBody from "../components/PostBody";
-import PostStats from "../components/PostStats";
 import PostDeleteModal from "../components/PostDeleteModal";
+import PostCloseModal from "../components/PostCloseModal";
 import ReportModal from "../components/ReportModal";
 import CommentSection from "../components/CommentSection";
 import Toast from "../components/Toast";
@@ -32,6 +32,7 @@ export default function PostDetailPage() {
   const [currentLikeCount, setCurrentLikeCount] = useState(0);
   const [isLikeLoading, setIsLikeLoading] = useState(false);
   const [postDeleteModalOpen, setPostDeleteModalOpen] = useState(false);
+  const [postCloseModalOpen, setPostCloseModalOpen] = useState(false);
   // 신고 대상: { type: "POST"|"COMMENT", id } 이거나, 닫혀 있으면 null
   const [reportTarget, setReportTarget] = useState(null);
   const [reportError, setReportError] = useState("");
@@ -102,6 +103,24 @@ export default function PostDetailPage() {
     }
   }
 
+  // 모집 마감: PATCH /posts/{postId}/recruit-status (재모집 불가, 멱등)
+  async function handleCloseRecruit() {
+    try {
+      const response = await apiFetch(`/posts/${postId}/recruit-status`, {
+        method: "PATCH",
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setPost((prev) => prev && { ...prev, recruitStatus: data.data.recruitStatus });
+        showToast("모집이 마감되었습니다.");
+      }
+    } catch (err) {
+      console.error("모집 마감 실패", err);
+    } finally {
+      setPostCloseModalOpen(false);
+    }
+  }
+
   function openReport(target) {
     setReportError("");
     setReportTarget(target);
@@ -152,18 +171,11 @@ export default function PostDetailPage() {
                 writerNickname={post.writerNickname}
                 date={formatDate(post.createdAt)}
                 isMine={post.isMine}
+                isClosed={post.recruitStatus === "CLOSED"}
                 onEdit={() => navigate(`/post-edit?postId=${postId}`)}
                 onDelete={() => setPostDeleteModalOpen(true)}
                 onReport={() => openReport({ type: "POST", id: Number(postId) })}
-              />
-
-              {!post.isBlind && <PostRecruitInfo post={post} />}
-
-              {post.imageUrl && <PostImage imageUrl={post.imageUrl} />}
-
-              <PostBody content={post.content} />
-
-              <PostStats
+                onCloseRecruit={() => setPostCloseModalOpen(true)}
                 likeCount={formatCount(currentLikeCount)}
                 isLiked={isLiked}
                 isLikeLoading={isLikeLoading}
@@ -171,6 +183,12 @@ export default function PostDetailPage() {
                 viewCount={formatCount(post.viewCount)}
                 commentCount={formatCount(post.comments.length)}
               />
+
+              {!post.isBlind && <PostRecruitInfo post={post} />}
+
+              {post.imageUrl && <PostImage imageUrl={post.imageUrl} />}
+
+              <PostBody content={post.content} />
 
               <hr className="divider" />
 
@@ -191,6 +209,12 @@ export default function PostDetailPage() {
         isOpen={postDeleteModalOpen}
         onCancel={() => setPostDeleteModalOpen(false)}
         onConfirm={handleDeletePost}
+      />
+
+      <PostCloseModal
+        isOpen={postCloseModalOpen}
+        onCancel={() => setPostCloseModalOpen(false)}
+        onConfirm={handleCloseRecruit}
       />
 
       <ReportModal

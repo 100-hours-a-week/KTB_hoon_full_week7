@@ -14,15 +14,15 @@ export default function HomePage() {
       <main className="home-main">
         <section className="hero">
           <div className="hero-copy">
-            <span className="hero-eyebrow">RECRUIT BOARD</span>
+            <span className="hero-eyebrow">MEETUP PLATFORM</span>
             <h1 className="hero-title">
-              함께할 팀원을
+              같이 할 사람들을
               <br />
-              여기서 <em>찾다</em>
+              지금 <em>만나다</em>
             </h1>
             <p className="hero-sub">
-              프로젝트 · 스터디 · 해커톤 — 지금 필요한 사람을 모으고,
-              마음에 드는 팀에 합류하세요.
+              운동 · 스터디 · 취미 · 맛집까지 — 관심사가 맞는 사람들을 모으고,
+              마음에 드는 모임에 합류하세요.
             </p>
 
             <div className="hero-cta">
@@ -49,10 +49,10 @@ export default function HomePage() {
             </div>
 
             <div className="hero-tags">
-              <span className="hero-tag"># 프로젝트</span>
+              <span className="hero-tag"># 운동/스포츠</span>
               <span className="hero-tag"># 스터디</span>
-              <span className="hero-tag"># 해커톤</span>
-              <span className="hero-tag"># 사이드프로젝트</span>
+              <span className="hero-tag"># 취미</span>
+              <span className="hero-tag"># 맛집/모임</span>
             </div>
           </div>
 

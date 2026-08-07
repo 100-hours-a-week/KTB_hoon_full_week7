@@ -68,3 +68,15 @@ export function formatAddress(address, placeName) {
   if (region && placeName) return `${region} · ${placeName}`;
   return region || placeName || "";
 }
+
+// 주소만(장소명 제외) 문자열로 합친다. 상세 위치(placeName)는 별도 표시용.
+export function formatAddressOnly(address) {
+  if (!address) return "";
+  const parts = [
+    address.sido,
+    address.sigungu,
+    address.eupmyeondong,
+    address.detail,
+  ].filter(Boolean);
+  return parts.join(" ");
+}
